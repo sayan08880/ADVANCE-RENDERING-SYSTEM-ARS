@@ -1,0 +1,90 @@
+<!-- ============ PAGE C : START ============ -->
+<section class="page-center long">
+  <div class="glass box start-box">
+    <h1 class="typing"><span id="type-line1"></span><br><span id="type-line2" class="grad"></span></h1>
+    <span class="caret"></span>
+    <p class="start-sub" id="type-sub"></p>
+    <div class="btn-row">
+      <a href="#info" class="btn primary">Open Info Page</a>
+      <a href="#status" class="btn">Live Status</a>
+    </div>
+  </div>
+
+  <div class="glass box doc-box">
+    <h3>Quick Start — Add Your Own Page</h3>
+    <ol>
+      <li>Create <code>page/myPage.html</code> with your content.</li>
+      <li>Register it in <code>JS/app.js</code>:
+        <code>ARS.Router.register("myPage", "page/myPage.html");</code></li>
+      <li>Add a nav link in <code>index.html</code>:
+        <code>&lt;a href="#myPage" data-route="myPage" class="nav-link"&gt;My Page&lt;/a&gt;</code></li>
+      <li>(Optional) For file:// support, add the HTML string to the <code>embedded</code> map in <code>JS/router.js</code>.</li>
+    </ol>
+    <p>The Engine auto-preloads and caches every route, and tracks FPS, hover analytics and cache size in real time.</p>
+  </div>
+
+  <div class="glass box doc-box">
+    <h3>Engine API</h3>
+    <ol>
+      <li><code>ARS.Renderer.stats()</code> — fps, frameTime, renders, uptime</li>
+      <li><code>ARS.Cache.set / get / stats / clear()</code> — LRU cache with byte tracking</li>
+      <li><code>ARS.Hover.stats()</code> — hover target, times, heat-map top element</li>
+      <li><code>ARS.Preloader.show / hide / preload()</code> — glass loading overlay</li>
+      <li><code>ARS.Router.register / load / current / pageCount()</code> — hash routing + page cache</li>
+    </ol>
+  </div>
+
+  <div class="glass box doc-box">
+    <h3>Folder Roles</h3>
+    <ul>
+      <li><code>index.html</code> — shell: nav, preloader, #app container, script order</li>
+      <li><code>page/</code> — one HTML file per route (content only, no full document)</li>
+      <li><code>JS/</code> — router + boot; register every new page here</li>
+      <li><code>CSS/</code> — Liquid Glass design system</li>
+      <li><code>Engine/</code> — renderer, hover, preloader, cache (do not remove)</li>
+      <li><code>Media/</code> — logos, images, icons</li>
+      <li><code>.env</code> — optional API keys for later integrations</li>
+    </ul>
+  </div>
+
+  <div class="glass box doc-box">
+    <h3>Long Page Section 1</h3>
+    <p>This page is intentionally long — scroll down to test smooth scrolling and hover analytics while you move the mouse.</p>
+  </div>
+  <div class="glass box doc-box">
+    <h3>Long Page Section 2</h3>
+    <p>Every element you hover is tracked by <code>Engine/hover.js</code> — open the Status page to watch it live.</p>
+  </div>
+  <div class="glass box doc-box">
+    <h3>Long Page Section 3</h3>
+    <p>Pages are fetched once (or served from embedded fallback), stored in the ARS cache, and served instantly on the next visit.</p>
+  </div>
+  <p class="filler">— End of page · keep building —</p>
+</section>
+
+<script>
+(function () {
+  var l1 = document.getElementById("type-line1");
+  var l2 = document.getElementById("type-line2");
+  var sub = document.getElementById("type-sub");
+  var t1 = "HELLO DEVELOPER";
+  var t2 = "START THE CODE";
+  var t3 = "ARS framework is ready — create pages in /page and register routes in JS/app.js";
+
+  function typeInto(el, text, speed, done) {
+    var i = 0;
+    (function step() {
+      if (i < text.length) {
+        el.textContent += text[i++];
+        setTimeout(step, speed + Math.random() * 40);
+      } else if (done) { setTimeout(done, 250); }
+    })();
+  }
+
+  typeInto(l1, t1, 70, function () {
+    typeInto(l2, t2, 70, function () {
+      typeInto(sub, t3, 22);
+    });
+  });
+})();
+</script>

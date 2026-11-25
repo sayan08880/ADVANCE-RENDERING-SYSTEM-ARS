@@ -1,0 +1,62 @@
+<!-- ============ PAGE B : LIVE STATUS ============ -->
+<section class="page-center">
+  <div class="glass box status-box">
+    <h2>Live Engine Status</h2>
+    <div class="status-grid">
+      <div class="stat"><span class="stat-label">FPS</span><span class="stat-value good" id="st-fps">–</span></div>
+      <div class="stat"><span class="stat-label">Frame Time</span><span class="stat-value" id="st-frame">–</span></div>
+      <div class="stat"><span class="stat-label">Renders</span><span class="stat-value" id="st-renders">–</span></div>
+      <div class="stat"><span class="stat-label">Uptime</span><span class="stat-value" id="st-uptime">–</span></div>
+      <div class="stat"><span class="stat-label">Total Pages</span><span class="stat-value good" id="st-pages">–</span></div>
+      <div class="stat"><span class="stat-label">Cache Size</span><span class="stat-value warn" id="st-cache">–</span></div>
+      <div class="stat"><span class="stat-label">Cache Entries</span><span class="stat-value" id="st-entries">–</span></div>
+      <div class="stat"><span class="stat-label">JS Heap</span><span class="stat-value warn" id="st-heap">–</span></div>
+      <div class="stat"><span class="stat-label">Current Route</span><span class="stat-value hot" id="st-route">–</span></div>
+      <div class="stat"><span class="stat-label">Page Load</span><span class="stat-value" id="st-load">–</span></div>
+      <div class="stat"><span class="stat-label">Hover Target</span><span class="stat-value" id="st-hover" title="">–</span></div>
+      <div class="stat"><span class="stat-label">Hover Time</span><span class="stat-value" id="st-hoverms">–</span></div>
+      <div class="stat"><span class="stat-label">Total Hovers</span><span class="stat-value" id="st-hovers">–</span></div>
+      <div class="stat"><span class="stat-label">Top Hovered</span><span class="stat-value hot" id="st-top" title="">–</span></div>
+      <div class="stat"><span class="stat-label">Elements Tracked</span><span class="stat-value" id="st-tracked">–</span></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  function $(id) { return document.getElementById(id); }
+  function fmtBytes(b) {
+    if (b < 1024) return b + " B";
+    if (b < 1024 * 1024) return (b / 1024).toFixed(1) + " KB";
+    return (b / (1024 * 1024)).toFixed(2) + " MB";
+  }
+  function tick() {
+    var r = ARS.Renderer.stats();
+    var c = ARS.Cache.stats();
+    var h = ARS.Hover.stats();
+    $("st-fps").textContent     = r.fps;
+    $("st-frame").textContent   = r.frameTime + " ms";
+    $("st-renders").textContent = r.renders;
+    $("st-uptime").textContent  = r.uptime + " s";
+    $("st-pages").textContent   = ARS.Router.pageCount ? ARS.Router.pageCount() : "–";
+    $("st-cache").textContent   = fmtBytes(c.bytes) + " / " + fmtBytes(c.maxBytes);
+    $("st-entries").textContent = c.entries;
+    $("st-heap").textContent    = (performance.memory)
+        ? fmtBytes(performance.memory.usedJSHeapSize) : "n/a";
+    $("st-route").textContent   = "#" + (ARS.Router.current() || "info");
+    var load = ARS.Cache.get("ars:load:" + ARS.Router.current());
+    $("st-load").textContent    = (load !== undefined) ? load + " ms" : "–";
+    var hoverEl = $("st-hover");
+    hoverEl.textContent = h.target;
+    hoverEl.title = h.target;
+    $("st-hoverms").textContent = h.hoverMs + " ms";
+    $("st-hovers").textContent  = h.totalHovers;
+    var topEl = $("st-top");
+    topEl.textContent = h.top.element + " ×" + h.top.count;
+    topEl.title = h.top.element + " ×" + h.top.count;
+    $("st-tracked").textContent = h.tracked;
+  }
+  setInterval(tick, 250);
+  tick();
+})();
+</script>

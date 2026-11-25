@@ -1,0 +1,27 @@
+[
+  {
+    "name": "info",
+    "title": "Info",
+    "path": "page/info.html"
+  },
+  {
+    "name": "status",
+    "title": "Status",
+    "path": "page/status.html"
+  },
+  {
+    "name": "start",
+    "title": "Start",
+    "path": "page/start.html"
+  },
+  {
+    "name": "myPage",
+    "title": "My Page",
+    "path": "page/myPage.html"
+  },
+  {
+    "name": "contact",
+    "title": "Contact",
+    "path": "page/contact.html"
+  }
+]

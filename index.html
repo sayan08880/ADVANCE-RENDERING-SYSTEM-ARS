@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARS</title>
+<link rel="icon" href="Media/ars-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="CSS/main.css">
+</head>
+<body>
+
+  <!-- animated liquid background -->
+  <div class="bg-orbs"><span></span><span></span><span></span></div>
+
+  <!-- ARS Preloader overlay -->
+  <div id="ars-preloader" class="preloader">
+    <div class="preloader-box glass">
+      <div class="loader-ring"></div>
+      <p id="ars-preloader-text">Loading…</p>
+      <div class="loader-bar"><i id="ars-preloader-bar"></i></div>
+    </div>
+  </div>
+
+  <!-- glass navigation -->
+  <nav class="nav glass">
+    <div class="nav-brand">
+      <img src="Media/ars-logo.svg" alt="ARS" class="nav-logo">
+      <span>ARS<em>Advance Rendering System</em></span>
+    </div>
+    <!-- Links are generated automatically from pages.json by app.js -->
+    <div class="nav-links" id="nav-links"></div>
+  </nav>
+
+  <!-- rendered page container (Engine injects /page/*.html here) -->
+  <main id="app" class="app"></main>
+
+  <!-- ================= ARS ENGINE ================= -->
+  <script src="Engine/cache.js"></script>
+  <script src="Engine/renderer.js"></script>
+  <script src="Engine/hover.js"></script>
+  <script src="Engine/preloader.js"></script>
+
+  <!-- ================= ARS APP ================= -->
+  <script src="JS/router.js"></script>
+  <script src="JS/app.js"></script>
+</body>
+</html>
